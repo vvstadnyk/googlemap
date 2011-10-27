@@ -1,0 +1,44 @@
+
+Z:\home\localhost\www\jobeet\lib\vendor\symfony\data\bin>rem ************************************************************* 
+
+Z:\home\localhost\www\jobeet\lib\vendor\symfony\data\bin>rem ** symfony CLI for Windows based systems (based on phing.bat) 
+
+Z:\home\localhost\www\jobeet\lib\vendor\symfony\data\bin>rem ************************************************************* 
+
+Z:\home\localhost\www\jobeet\lib\vendor\symfony\data\bin>rem This script will do the following: 
+
+Z:\home\localhost\www\jobeet\lib\vendor\symfony\data\bin>rem - check for PHP_COMMAND env, if found, use it. 
+
+Z:\home\localhost\www\jobeet\lib\vendor\symfony\data\bin>rem   - if not found detect php, if found use it, otherwise err and terminate 
+
+Z:\home\localhost\www\jobeet\lib\vendor\symfony\data\bin>if "Windows_NT" == "Windows_NT" 
+
+Z:\home\localhost\www\jobeet\lib\vendor\symfony\data\bin>rem Z:\home\localhost\www\jobeet\lib\vendor\symfony\data\bin\ is expanded pathname of the current script under NT 
+
+Z:\home\localhost\www\jobeet\lib\vendor\symfony\data\bin>set SCRIPT_DIR=Z:\home\localhost\www\jobeet\lib\vendor\symfony\data\bin\ 
+
+Z:\home\localhost\www\jobeet\lib\vendor\symfony\data\bin>goto init 
+
+Z:\home\localhost\www\jobeet\lib\vendor\symfony\data\bin>if "" == "" goto no_phpcommand 
+
+Z:\home\localhost\www\jobeet\lib\vendor\symfony\data\bin>rem echo ------------------------------------------------------------------------ 
+
+Z:\home\localhost\www\jobeet\lib\vendor\symfony\data\bin>rem echo WARNING: Set environment var PHP_COMMAND to the location of your php.exe 
+
+Z:\home\localhost\www\jobeet\lib\vendor\symfony\data\bin>rem echo          executable (e.g. C:\PHP\php.exe).  (assuming php.exe on PATH) 
+
+Z:\home\localhost\www\jobeet\lib\vendor\symfony\data\bin>rem echo ------------------------------------------------------------------------ 
+
+Z:\home\localhost\www\jobeet\lib\vendor\symfony\data\bin>set PHP_COMMAND=php.exe 
+
+Z:\home\localhost\www\jobeet\lib\vendor\symfony\data\bin>goto init 
+
+Z:\home\localhost\www\jobeet\lib\vendor\symfony\data\bin>if "php.exe" == "" goto no_phpcommand 
+
+Z:\home\localhost\www\jobeet\lib\vendor\symfony\data\bin>if "Z:\home\localhost\www\jobeet\lib\vendor\symfony\data\bin\" == "" (php.exe "symfony"  )  else (php.exe "Z:\home\localhost\www\jobeet\lib\vendor\symfony\data\bin\\symfony"  ) 
+
+Z:\home\localhost\www\jobeet\lib\vendor\symfony\data\bin>goto cleanup 
+
+Z:\home\localhost\www\jobeet\lib\vendor\symfony\data\bin>if "Windows_NT" == "Windows_NT" 
+
+Z:\home\localhost\www\jobeet\lib\vendor\symfony\data\bin>rem pause 

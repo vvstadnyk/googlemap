@@ -1,0 +1,28 @@
+Oct 27 13:00:40 symfony [info] {sfPatternRouting} Match route "homepage" (/) for / with parameters array (  'module' => 'default',  'action' => 'index',)
+Oct 27 13:00:40 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 27 13:00:40 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 27 13:00:40 symfony [info] {defaultActions} Call "defaultActions->executeIndex()"
+Oct 27 13:00:40 symfony [info] {sfPHPView} Render "/var/www/googlemap/lib/vendor/symfony/lib/controller/default/templates/indexSuccess.php"
+Oct 27 13:00:40 symfony [info] {sfPHPView} Decorate content with "/var/www/googlemap/lib/vendor/symfony/lib/controller/default/templates/defaultLayout.php"
+Oct 27 13:00:40 symfony [info] {sfPHPView} Render "/var/www/googlemap/lib/vendor/symfony/lib/controller/default/templates/defaultLayout.php"
+Oct 27 13:00:40 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 27 13:00:40 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 27 13:00:40 symfony [info] {sfWebDebugLogger} Configuration 154.14 ms (9)
+Oct 27 13:00:40 symfony [info] {sfWebDebugLogger} Factories 120.89 ms (1)
+Oct 27 13:00:40 symfony [info] {sfWebDebugLogger} Action "default/index" 0.19 ms (1)
+Oct 27 13:00:40 symfony [info] {sfWebDebugLogger} View "Success" for "default/index" 13.02 ms (1)
+Oct 27 13:00:40 symfony [info] {sfWebResponse} Send content (28575 o)
+Oct 27 14:47:40 symfony [info] {sfPatternRouting} Match route "homepage" (/) for / with parameters array (  'module' => 'default',  'action' => 'index',)
+Oct 27 14:47:40 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 27 14:47:40 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 27 14:47:40 symfony [info] {defaultActions} Call "defaultActions->executeIndex()"
+Oct 27 14:47:40 symfony [info] {sfPHPView} Render "/var/www/googlemap/lib/vendor/symfony/lib/controller/default/templates/indexSuccess.php"
+Oct 27 14:47:40 symfony [info] {sfPHPView} Decorate content with "/var/www/googlemap/lib/vendor/symfony/lib/controller/default/templates/defaultLayout.php"
+Oct 27 14:47:40 symfony [info] {sfPHPView} Render "/var/www/googlemap/lib/vendor/symfony/lib/controller/default/templates/defaultLayout.php"
+Oct 27 14:47:40 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 27 14:47:40 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 27 14:47:40 symfony [info] {sfWebDebugLogger} Configuration 163.55 ms (9)
+Oct 27 14:47:40 symfony [info] {sfWebDebugLogger} Factories 117.56 ms (1)
+Oct 27 14:47:40 symfony [info] {sfWebDebugLogger} Action "default/index" 0.19 ms (1)
+Oct 27 14:47:40 symfony [info] {sfWebDebugLogger} View "Success" for "default/index" 13.23 ms (1)
+Oct 27 14:47:40 symfony [info] {sfWebResponse} Send content (28410 o)
