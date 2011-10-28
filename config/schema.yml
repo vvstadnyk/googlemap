@@ -1,0 +1,14 @@
+propel:
+  category:
+    id:           ~
+    name:         { type: varchar(100), required: true }
+    slug:         { type: varchar(100), required: true, index: unique }
+
+  place:
+    id:           ~
+    category_id:  { type: integer, foreignTable: category, foreignReference: id, required: true }
+    user_id:      { type: integer, foreignTable: sf_guard_user, foreignReference: id }
+    lat:          { type: decimal, required: true }
+    lng:          { type: decimal, required: true }
+    created_at:   ~
+    description:  { type: varchar(100), required: false }

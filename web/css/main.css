@@ -1,0 +1,16 @@
+#map {
+    border: 1px solid black;
+    width: 700px;
+    height: 400px;
+    margin: 0 auto;
+}
+
+#marker_save {
+    margin-top: 15px;
+    color: gray;
+}
+
+#infotext {
+    width: 185px;
+    height:100px;
+}
