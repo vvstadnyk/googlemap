@@ -18,4 +18,16 @@
  */
 class PlacePeer extends BasePlacePeer {
 
+    static public function getPlacesByUser($user_id)
+    {
+        $criteria = new Criteria();
+        $criteria->add(PlacePeer::USER_ID, $user_id);
+        return self::doSelect($criteria);
+    }
+    static public function getCountPlacesByUser($user_id)
+    {
+        $criteria = new Criteria();
+        $criteria->add(PlacePeer::USER_ID, $user_id);
+        return self::doCount($criteria);
+    }
 } // PlacePeer

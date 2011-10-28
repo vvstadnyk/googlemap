@@ -6,8 +6,7 @@
     <?php include_javascripts() ?>
     <?php include_stylesheets() ?>
   </head>
-  <body <?php if ($sf_request->getParameter('module') == 'map') echo 'onload="initialize()"';?>>
-
+  <body>
   <div id="container">
       <div id="header">
         <h1><a href="<?php echo url_for('@homepage') ?>">Google maps</a></h1>
@@ -16,7 +15,7 @@
       <?php if ($sf_user->isAuthenticated()): ?>
         <div id="menu">
           <ul>
-            <li><?php echo link_to('Logout', 'sf_guard_signout') ?></li>
+            <li><?php echo link_to('Logout ('.$sf_user->getGuardUser().')', 'sf_guard_signout') ?></li>
           </ul>
         </div>
       <?php endif ?>

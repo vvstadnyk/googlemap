@@ -25,10 +25,8 @@ class Place extends BasePlace {
           $this->setCategoryId(1);
           $this->setLat(10);
           $this->setLng(20);
-          $this->setUserId($this->getsfGuardUser());
       }
 
       return parent::save($con);
     }
-
 } // Place

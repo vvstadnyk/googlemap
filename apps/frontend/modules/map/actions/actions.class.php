@@ -17,11 +17,19 @@ class mapActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    //$this->forward('default', 'module');
+    $this->places = PlacePeer::getPlacesByUser($this->GetUserId());
   }
 
   public function executeSave(sfWebRequest $request)
   {
-      
+      $place = new Place();
+      $place->setUserId($this->GetUserId());
+      $place->save();
+      $this->redirect('map/index');
+  }
+
+  private function GetUserId()
+  {
+      return $this->getUser()->getGuardUser()->getId();
   }
 }

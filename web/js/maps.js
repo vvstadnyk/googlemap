@@ -1,10 +1,15 @@
+jQuery.noConflict();
+jQuery('document').ready(function() {
+    jQuery('body').attr('onload', 'initialize()');
+});
+
 var map;
-var image_my = "/images/img_yellow.png";
-var image_all = "/images/img_blue.png";
+var image_all = "/images/img_yellow.png";
+var image_my = "/images/img_blue.png";
 var text_title = "hello World";
 var contentWindow = "<div id='comment_label'>Введите коментарий</div>" +
                     "<textarea id='infotext' name='infotext' style='infotext'></textarea><br />" +
-                    "<a id='marker_save' href='http://localhost/maps'>Сохранить</a>";
+                    "<a id='marker_save' href= '"+ document.location.href + "/map/save'>Сохранить</a>";
 var infoWindow = new google.maps.InfoWindow({
 content: contentWindow
 })
@@ -16,7 +21,7 @@ function initialize() {
       center: Latlng,
       mapTypeId: google.maps.MapTypeId.ROADMAP
   }
-map = new google.maps.Map(document.getElementById("map"), Options);
+map = new google.maps.Map(document.getElementById('map'), Options);
 
 function addMarker(location, img, hint, description) {
     var marker = new google.maps.Marker({
@@ -38,6 +43,6 @@ function addMarker(location, img, hint, description) {
 }
 
 google.maps.event.addListener(map, 'click', function(event) {
-    addMarker(event.latLng, image_all, text_title, contentWindow);
+    addMarker(event.latLng, image_my, text_title, contentWindow);
 })
 }

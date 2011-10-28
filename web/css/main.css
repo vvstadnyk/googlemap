@@ -14,3 +14,13 @@
     width: 185px;
     height:100px;
 }
+
+.places {
+    border: 1px solid #000000;
+    margin: 0 auto;
+    width: 700px;
+}
+.places td {
+    border: 1px solid #000000;
+    width: 25%;
+}
