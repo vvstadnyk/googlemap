@@ -5,22 +5,16 @@
     margin: 0 auto;
 }
 
-#marker_save {
-    margin-top: 15px;
-    color: gray;
+#popup_window {
+    height:200px;
 }
 
-#infotext {
-    width: 185px;
-    height:100px;
-}
-
-.places {
+.places_list {
     border: 1px solid #000000;
     margin: 0 auto;
     width: 700px;
 }
-.places td {
+.places_list td {
     border: 1px solid #000000;
     width: 25%;
 }

@@ -22,10 +22,18 @@ class mapActions extends sfActions
 
   public function executeSave(sfWebRequest $request)
   {
-      $place = new Place();
-      $place->setUserId($this->GetUserId());
-      $place->save();
-      $this->redirect('map/index');
+      if ($request->isXmlHttpRequest())
+      {
+          $place = new Place();
+          $place->setUserId($this->GetUserId());
+          $place->save();
+
+          $this->places = PlacePeer::getPlacesByUser($this->GetUserId());
+          return $this->renderPartial('map/list', array('places' => $this->places));
+
+      }
+
+      
   }
 
   private function GetUserId()

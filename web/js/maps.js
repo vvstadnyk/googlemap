@@ -7,12 +7,29 @@ var map;
 var image_all = "/images/img_yellow.png";
 var image_my = "/images/img_blue.png";
 var text_title = "hello World";
-var contentWindow = "<div id='comment_label'>Введите коментарий</div>" +
-                    "<textarea id='infotext' name='infotext' style='infotext'></textarea><br />" +
-                    "<a id='marker_save' href= '"+ document.location.href + "/map/save'>Сохранить</a>";
+var contentWindow = "<div id='popup_window'>" +
+                      "<label>Коментарий</label><br />" +
+                      "<textarea id='infotext' name='infotext' style='infotext'></textarea><br />" +
+                      "<input type='submit' onclick='ClickSave()' value='Добавить'>" +
+                    "</div>";
 var infoWindow = new google.maps.InfoWindow({
 content: contentWindow
 })
+
+function ClickSave() {
+    jQuery.ajax({
+        type: "POST",
+        dataType: "html",
+        url: document.location.href +"/map/save",
+        success: function(html){
+            alert(jQuery('#places').htmlText);
+            alert(html);
+            jQuery('#places').html(html);
+          }
+
+        });
+
+}
 
 function initialize() {
   var Latlng = new google.maps.LatLng(49.438, 32.067);
@@ -31,6 +48,7 @@ function addMarker(location, img, hint, description) {
         draggable: true,
         title: hint
     })
+
 
     google.maps.event.addListener(marker, 'click', function(event) {
         infoWindow.open(map, marker);

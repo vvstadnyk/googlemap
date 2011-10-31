@@ -5,11 +5,15 @@
 
 place:
   url:  /map/save
+  class: sfRequestRoute
   param: { module: map, action: save }
+  requirements:
+    sf_method: [post]
 
 homepage:
   url:   /
   param: { module: map, action: index }
+
 
 # generic rules
 # please, remove them by adding more specific rules
