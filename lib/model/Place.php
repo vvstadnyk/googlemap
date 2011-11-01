@@ -18,30 +18,23 @@
  */
 class Place extends BasePlace {
 
-  public function asArray($host)
+  public function asArray($currentUserId)
   {
     return array(
-      'category'     => $this->getCategory(),
-      'type'         => $this->getCategoryId(),
-      'company'      => $this->getCompany(),
-      'logo'         => $this->getLogo() ? 'http://'.$host.'/uploads/jobs/'.$this->getLogo() : null,
-      'url'          => $this->getUrl(),
-      'position'     => $this->getPosition(),
-      'location'     => $this->getLocation(),
-      'description'  => $this->getDescription(),
-      'how_to_apply' => $this->getHowToApply(),
-      'expires_at'   => $this->getCreatedAt('c'),
+      'id'            => $this->getId(),
+      'category'      => $this->getCategory(),
+      'categoryId'    => $this->getCategoryId(),
+      'user'          => $this->getsfGuardUser()->getUsername(),
+      'userId'        => $this->getUserId(),
+      'currentUserId' => $currentUserId,
+      'lat'           => $this->getLat(),
+      'lng'           => $this->getLng(),
+      'description'   => $this->getDescription(),
+      'createdAt'    => $this->getCreatedAt('Y-m-d H:i:s')
     );
   }
     public function save(PropelPDO $con = null)
     {
-      if ($this->isNew())
-      {
-          $this->setCategoryId(1);
-          $this->setLat(10);
-          $this->setLng(20);
-      }
-
       return parent::save($con);
     }
 } // Place

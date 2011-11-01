@@ -1,5 +1,4 @@
 <div id="places">
-    <div>count: <?php  echo PlacePeer::getCountPlacesByUser($sf_user->getGuardUser()->getId()) ?></div>
     <table class="places_list">
       <?php foreach ($places as $i => $place): ?>
         <tr class="<?php echo fmod($i, 2) ? 'even' : 'odd' ?>">

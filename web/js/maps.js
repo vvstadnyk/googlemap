@@ -5,7 +5,7 @@ jQuery('document').ready(function() {
 
 });
 
-var map;
+var map, curmarker;
 var markers = new Array();
 var image_all = "/images/img_yellow.png";
 var image_my = "/images/img_blue.png";
@@ -22,11 +22,27 @@ function ClickSave() {
         type: "POST",
         dataType: "html",
         data: {
-                description:  jQuery('#my_description').val()
+                description:  jQuery('#my_description').val(),
+                lat:          curmarker.getPosition().lat(),
+                lng:          curmarker.getPosition().lng(),
+                category:     1
         },
         url: document.location.href +"/map/save",
-        success: function(html){
-            jQuery('#places').html(html);
+        success: function(){
+            infoWindow.close();
+          }
+        });
+}
+
+function LoadMarkers() {
+    jQuery.ajax({
+        type: "GET",
+        dataType: "xml",
+        url: document.location.href +"/map/places.xml",
+        success: function(result){
+           jQuery(result).find("place").each(function () {
+              alert(jQuery(this).find("id").text());
+           })
           }
         });
 }
@@ -38,7 +54,6 @@ function test()
     }
 }
 
-
 function initialize() {
     var Latlng = new google.maps.LatLng(49.438, 32.067);
     var Options = {
@@ -47,8 +62,10 @@ function initialize() {
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU}
     }
-    map = new google.maps.Map(document.getElementById('map'), Options);
 
+    LoadMarkers();
+
+    map = new google.maps.Map(document.getElementById('map'), Options);
     google.maps.event.addListener(map, 'click', function(event) {
         addMarker(event.latLng, image_my, text_title, contentWindow);
     })
@@ -63,7 +80,8 @@ function dropMarker(marker)
 
 function showWindow(marker)
 {
-    infoWindow.setContent(marker.getTitle());
+    curmarker = marker;
+    infoWindow.setContent(contentWindow);
     infoWindow.open(map, marker);
 }
 

@@ -8,7 +8,7 @@ propel:
     id:           ~
     category_id:  { type: integer, foreignTable: category, foreignReference: id, required: true }
     user_id:      { type: integer, foreignTable: sf_guard_user, foreignReference: id }
-    lat:          { type: decimal, required: true }
-    lng:          { type: decimal, required: true }
+    lat:          { type: float, required: true }
+    lng:          { type: float, required: true }
     created_at:   ~
     description:  { type: varchar(100), required: false }
