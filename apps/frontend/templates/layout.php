@@ -21,6 +21,7 @@
       <?php endif ?>
 
       <div id="content">
+        <input id="test" type="submit" value="test"><br />
         <?php echo $sf_content ?>
       </div>
 

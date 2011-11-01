@@ -3,5 +3,4 @@
 <?php use_javascript('jquery.alerts.js') ?>
 <?php use_stylesheet('jquery.alerts.css') ?>
 <?php use_javascript('maps.js') ?>
-<?php include_partial('map/list', array('places' => $places)) ?>
 <div id="map"></div>

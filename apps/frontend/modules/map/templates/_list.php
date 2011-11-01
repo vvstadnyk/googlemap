@@ -15,6 +15,9 @@
           <td class="lat">
             <?php echo $place->getLng()  ?>
           </td>
+          <td class="description">
+            <?php echo $place->getDescription()  ?>
+          </td>
           <td class="create_at">
             <?php echo $place->getCreatedAt('Y-m-d H:i:s')  ?>
           </td>

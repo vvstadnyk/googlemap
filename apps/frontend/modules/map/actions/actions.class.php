@@ -17,7 +17,15 @@ class mapActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    $this->places = PlacePeer::getPlacesByUser($this->GetUserId());
+
+  }
+
+  public function executeXml(sfWebRequest $request)
+  {
+      if ($request->isXmlHttpRequest())
+      {
+          $this->places = PlacePeer::getPlacesByUser($this->GetUserId());
+      }
   }
 
   public function executeSave(sfWebRequest $request)
