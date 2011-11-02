@@ -3,12 +3,19 @@
 
 # default rules
 
-xml:
+categoryxml:
+  url:  /map/categoryes.:sf_format
+  class: sfRequestRoute
+  param: { module: map, action: categoryes }
+  requirements:
+    sf_format: (?:xml)
+
+placexml:
   url:  /map/places.:sf_format
   class: sfRequestRoute
-  param: { module: map, action: list }
+  param: { module: map, action: places }
   requirements:
-    sf_format: (?:xml|json|yaml)
+    sf_format: (?:xml)
     
 place:
   url:  /map/save

@@ -20,17 +20,25 @@ class mapActions extends sfActions
 
   }
 
-  public function executeList(sfWebRequest $request)
+  public function executePlaces(sfWebRequest $request)
   {
       if ($request->isXmlHttpRequest())
-      {
+     {
           $this->places = array();
           foreach (PlacePeer::getPlaces() as $palace)
           {
               $this->places[$palace->getId()] = $palace->asArray($this->GetUserId());
           }
-      }
+     }
   }
+
+public function executeCategoryes(sfWebRequest $request)
+{
+    if ($request->isXmlHttpRequest())
+   {
+        $this->categoryes = CategoryPeer::getCategoryes();
+   }
+}
 
   public function executeSave(sfWebRequest $request)
   {
@@ -42,6 +50,7 @@ class mapActions extends sfActions
           $place->setCategoryId($request->getParameter('category'));
           $place->setLat($request->getParameter('lat'));
           $place->setLng($request->getParameter('lng'));
+          $place->setName($request->getParameter('name'));
           $place->save();
       }
 

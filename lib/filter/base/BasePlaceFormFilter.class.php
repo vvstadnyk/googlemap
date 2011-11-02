@@ -14,6 +14,7 @@ abstract class BasePlaceFormFilter extends BaseFormFilterPropel
     $this->setWidgets(array(
       'category_id' => new sfWidgetFormPropelChoice(array('model' => 'Category', 'add_empty' => true)),
       'user_id'     => new sfWidgetFormPropelChoice(array('model' => 'sfGuardUser', 'add_empty' => true)),
+      'name'        => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'lat'         => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'lng'         => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'created_at'  => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate())),
@@ -23,6 +24,7 @@ abstract class BasePlaceFormFilter extends BaseFormFilterPropel
     $this->setValidators(array(
       'category_id' => new sfValidatorPropelChoice(array('required' => false, 'model' => 'Category', 'column' => 'id')),
       'user_id'     => new sfValidatorPropelChoice(array('required' => false, 'model' => 'sfGuardUser', 'column' => 'id')),
+      'name'        => new sfValidatorPass(array('required' => false)),
       'lat'         => new sfValidatorSchemaFilter('text', new sfValidatorNumber(array('required' => false))),
       'lng'         => new sfValidatorSchemaFilter('text', new sfValidatorNumber(array('required' => false))),
       'created_at'  => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
@@ -47,6 +49,7 @@ abstract class BasePlaceFormFilter extends BaseFormFilterPropel
       'id'          => 'Number',
       'category_id' => 'ForeignKey',
       'user_id'     => 'ForeignKey',
+      'name'        => 'Text',
       'lat'         => 'Number',
       'lng'         => 'Number',
       'created_at'  => 'Date',

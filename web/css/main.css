@@ -1,20 +1,33 @@
 #map {
     border: 1px solid black;
-    width: 700px;
-    height: 400px;
-    margin: 0 auto;
-}
-
-#popup_window {
-    height:200px;
-}
-
-.places_list {
-    border: 1px solid #000000;
-    margin: 0 auto;
     width: 800px;
+    height: 500px;
+    margin: 0 auto;
 }
-.places_list td {
-    border: 1px solid #000000;
-    width: 17%;
+
+#window_add {
+    height:250px;
+    width: 350px;
+}
+
+#window_add div {
+    margin-top: 5px;
+}
+
+#window_add label {
+    color: #666666;
+    display: block;
+    float: left;
+    font-weight: normal !important;
+    padding: 0 1em 3px 0;
+    text-align: left;
+    width: 5em;
+}
+#add_name, #add_category, #add_description
+{
+    width: 200px;
+}
+
+#add_description {
+    height: 100px;
 }

@@ -17,6 +17,7 @@ abstract class BasePlaceForm extends BaseFormPropel
       'id'          => new sfWidgetFormInputHidden(),
       'category_id' => new sfWidgetFormPropelChoice(array('model' => 'Category', 'add_empty' => false)),
       'user_id'     => new sfWidgetFormPropelChoice(array('model' => 'sfGuardUser', 'add_empty' => true)),
+      'name'        => new sfWidgetFormInputText(),
       'lat'         => new sfWidgetFormInputText(),
       'lng'         => new sfWidgetFormInputText(),
       'created_at'  => new sfWidgetFormDateTime(),
@@ -27,10 +28,11 @@ abstract class BasePlaceForm extends BaseFormPropel
       'id'          => new sfValidatorChoice(array('choices' => array($this->getObject()->getId()), 'empty_value' => $this->getObject()->getId(), 'required' => false)),
       'category_id' => new sfValidatorPropelChoice(array('model' => 'Category', 'column' => 'id')),
       'user_id'     => new sfValidatorPropelChoice(array('model' => 'sfGuardUser', 'column' => 'id', 'required' => false)),
+      'name'        => new sfValidatorString(array('max_length' => 100)),
       'lat'         => new sfValidatorNumber(),
       'lng'         => new sfValidatorNumber(),
       'created_at'  => new sfValidatorDateTime(array('required' => false)),
-      'description' => new sfValidatorString(array('max_length' => 100, 'required' => false)),
+      'description' => new sfValidatorString(array('max_length' => 255, 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('place[%s]');

@@ -1,3 +1,6 @@
 Category:
-  Test:
-    name: Test
+  data1: { name: Музей, slug: muse }
+  data2: { name: Парк, slug: park }
+  data3: { name: Площа, slug: place }
+  data4: { name: Памятник, slug: pam }
+  data5: { name: Креатив :), slug: kreativ }

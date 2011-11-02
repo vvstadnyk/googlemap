@@ -18,4 +18,10 @@
  */
 class CategoryPeer extends BaseCategoryPeer {
 
+    static public function getCategoryes()
+    {
+        $criteria = new Criteria();
+        return self::doSelect($criteria);
+    }
+
 } // CategoryPeer

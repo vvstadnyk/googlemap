@@ -24,6 +24,7 @@ class Place extends BasePlace {
       'id'            => $this->getId(),
       'category'      => $this->getCategory(),
       'categoryId'    => $this->getCategoryId(),
+      'name'          => $this->getName(),
       'user'          => $this->getsfGuardUser()->getUsername(),
       'userId'        => $this->getUserId(),
       'currentUserId' => $currentUserId,

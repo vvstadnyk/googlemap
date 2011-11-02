@@ -31,10 +31,11 @@ CREATE TABLE `place`
 	`id` INTEGER  NOT NULL AUTO_INCREMENT,
 	`category_id` INTEGER  NOT NULL,
 	`user_id` INTEGER,
+	`name` VARCHAR(100)  NOT NULL,
 	`lat` FLOAT  NOT NULL,
 	`lng` FLOAT  NOT NULL,
 	`created_at` DATETIME,
-	`description` VARCHAR(100),
+	`description` VARCHAR(255),
 	PRIMARY KEY (`id`),
 	INDEX `place_FI_1` (`category_id`),
 	CONSTRAINT `place_FK_1`
