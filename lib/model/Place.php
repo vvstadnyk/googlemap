@@ -31,11 +31,15 @@ class Place extends BasePlace {
       'lat'           => $this->getLat(),
       'lng'           => $this->getLng(),
       'description'   => $this->getDescription(),
-      'createdAt'    => $this->getCreatedAt('Y-m-d H:i:s')
+      'createdAt'     => $this->getCreatedAt('Y-m-d H:i:s')
     );
   }
-    public function save(PropelPDO $con = null)
+    public function save(PropelPDO $con = null, $user_id = null)
     {
+        if ($this->isNew())
+        {
+            $this->setUserId($user_id);
+        }
       return parent::save($con);
     }
 } // Place

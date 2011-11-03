@@ -11,5 +11,6 @@ class PlaceForm extends BasePlaceForm
 {
   public function configure()
   {
+      unset($this['created_at']);
   }
 }

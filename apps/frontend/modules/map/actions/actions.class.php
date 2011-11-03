@@ -40,6 +40,27 @@ public function executeCategoryes(sfWebRequest $request)
    }
 }
 
+public function executeNew(sfWebRequest $request)
+{
+//    if ($request->isXmlHttpRequest())
+//   {
+       $place = new Place();
+       $place->setUserId($this->GetUserId());
+       $this->form = new PlaceForm($place);
+//   }
+}
+
+public function executeCreate(sfWebRequest $request)
+{
+    //    if ($request->isXmlHttpRequest())
+    //   {
+       $this->form = new PlaceForm();
+       $this->processForm($request, $this->form);
+       $this->setTemplate('new');
+    //   }
+}
+
+
   public function executeSave(sfWebRequest $request)
   {
       if ($request->isXmlHttpRequest())
@@ -53,12 +74,26 @@ public function executeCategoryes(sfWebRequest $request)
           $place->setName($request->getParameter('name'));
           $place->save();
       }
-
-      
   }
 
-  private function GetUserId()
+private function GetUserId()
+{
+  return $this->getUser()->getGuardUser()->getId();
+}
+
+protected function processForm(sfWebRequest $request, sfForm $form)
+{
+  $form->bind(
+      $request->getParameter($form->getName()),
+      $request->getFiles($form->getName())
+  );
+
+  if ($form->isValid())
   {
-      return $this->getUser()->getGuardUser()->getId();
+      $form->save();
+//    $place = $form->save();
+      $this->redirect('/');
   }
+}
+
 }

@@ -9,11 +9,6 @@ var map, curmarker, contentWindow;
 var markers = new Array();
 var image_all = "/images/img_yellow.png";
 var image_my = "/images/img_blue.png";
-var contentAdd_old = "<div id='popup_window'>" +
-                    "<label>Коментарий</label><br />" +
-                    "<textarea id='my_description' name='my_description' style='my_description'></textarea><br />" +
-                    "<input id='btsave' type='submit' onclick='saveMarker()' value='Добавить'>" +
-                  "</div>";
 
 var contentAdd =
      "<div id='window_add'>" +
@@ -33,8 +28,7 @@ function loadMarkers() {
         url: document.location.href +"/map/categoryes.xml",
         success: function(result){
            jQuery(result).find("category").each(function () {
-               alert(jQuery(this).find("name").text());
-              //jQuery(contentAdd).append(jQuery("<option value="+jQuery(this).find("id").text()+'>'+jQuery(this).find("name").text()+'</option>'))
+
            })
           }
         });
@@ -79,7 +73,15 @@ function initialize() {
 function showWindow(marker)
 {
     curmarker = marker;
-    infoWindow.setContent(contentWindow);
+    for (var i = 0; i < markers.length; i++) {
+      if (markers[i] == marker)
+      {
+          infoWindow.setContent(contentWindow);
+      } else
+      {
+          infoWindow.setContent("<h2>test</h2>");
+      }
+    }
     infoWindow.open(map, marker);
 }
 
