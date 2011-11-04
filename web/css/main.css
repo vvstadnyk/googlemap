@@ -5,29 +5,12 @@
     margin: 0 auto;
 }
 
-#window_add {
-    height:250px;
-    width: 350px;
+#div_place_new {
+    height:270px;
+    width: 300px;
 }
 
-#window_add div {
-    margin-top: 5px;
-}
-
-#window_add label {
-    color: #666666;
-    display: block;
-    float: left;
-    font-weight: normal !important;
-    padding: 0 1em 3px 0;
-    text-align: left;
-    width: 5em;
-}
-#add_name, #add_category, #add_description
-{
-    width: 200px;
-}
-
-#add_description {
-    height: 100px;
+.error_list {
+    color: red;
+    font-size: 10;
 }

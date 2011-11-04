@@ -22,14 +22,14 @@ class mapActions extends sfActions
 
   public function executePlaces(sfWebRequest $request)
   {
-      if ($request->isXmlHttpRequest())
-     {
+//      if ($request->isXmlHttpRequest())
+//     {
           $this->places = array();
           foreach (PlacePeer::getPlaces() as $palace)
           {
-              $this->places[$palace->getId()] = $palace->asArray($this->GetUserId());
+              $this->places[$palace->getId()] = $palace->asArray();
           }
-     }
+//     }
   }
 
 public function executeCategoryes(sfWebRequest $request)
@@ -42,12 +42,11 @@ public function executeCategoryes(sfWebRequest $request)
 
 public function executeNew(sfWebRequest $request)
 {
-//    if ($request->isXmlHttpRequest())
-//   {
+    if ($request->isXmlHttpRequest())
+   {
        $place = new Place();
-       $place->setUserId($this->GetUserId());
        $this->form = new PlaceForm($place);
-//   }
+   }
 }
 
 public function executeCreate(sfWebRequest $request)
@@ -56,7 +55,6 @@ public function executeCreate(sfWebRequest $request)
     //   {
        $this->form = new PlaceForm();
        $this->processForm($request, $this->form);
-       $this->setTemplate('new');
     //   }
 }
 
@@ -76,11 +74,6 @@ public function executeCreate(sfWebRequest $request)
       }
   }
 
-private function GetUserId()
-{
-  return $this->getUser()->getGuardUser()->getId();
-}
-
 protected function processForm(sfWebRequest $request, sfForm $form)
 {
   $form->bind(
@@ -91,8 +84,10 @@ protected function processForm(sfWebRequest $request, sfForm $form)
   if ($form->isValid())
   {
       $form->save();
-//    $place = $form->save();
-      $this->redirect('/');
+      $this->setTemplate('save');
+  } else
+  {
+      $this->setTemplate('new');
   }
 }
 
