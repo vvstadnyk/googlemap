@@ -30,7 +30,7 @@ CREATE TABLE `place`
 (
 	`id` INTEGER  NOT NULL AUTO_INCREMENT,
 	`category_id` INTEGER  NOT NULL,
-	`user_id` INTEGER,
+	`user_id` INTEGER  NOT NULL,
 	`name` VARCHAR(100)  NOT NULL,
 	`lat` FLOAT  NOT NULL,
 	`lng` FLOAT  NOT NULL,

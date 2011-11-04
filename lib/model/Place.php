@@ -34,11 +34,11 @@ class Place extends BasePlace {
       'createdAt'     => $this->getCreatedAt('Y-m-d H:i:s')
     );
   }
-    public function save(PropelPDO $con = null, $user_id = null)
+    public function save(PropelPDO $con = null)
     {
         if ($this->isNew())
         {
-            $this->setUserId($user_id);
+            $this->setUserId(sfContext::getInstance()->getUser());
         }
       return parent::save($con);
     }

@@ -73,15 +73,28 @@ function initialize() {
 function showWindow(marker)
 {
     curmarker = marker;
+    var is_new = true;
     for (var i = 0; i < markers.length; i++) {
       if (markers[i] == marker)
       {
-          infoWindow.setContent(contentWindow);
-      } else
-      {
-          infoWindow.setContent("<h2>test</h2>");
+          is_new = false;
       }
     }
+      if (is_new) {
+          jQuery.ajax({
+              type: "GET",
+              dataType: "html",
+              url: document.location.href +"/map/new",
+              success: function(result){
+                  infoWindow.setContent(result);
+                }
+              });
+
+      } else
+      {
+          infoWindow.setContent("<h2>is from base</h2>");
+      }
+    infoWindow.setContent('test');
     infoWindow.open(map, marker);
 }
 
@@ -92,16 +105,18 @@ function addMarker(location, img, title) {
         icon: img,
         draggable: true,
         title: title
-    })
-    markers.push(marker);
-
+    });
+//    if (title.length() > 0)
+//    {
+//        markers.push(marker);
+//    }
     google.maps.event.addListener(marker, 'click', function(event) {
         showWindow(marker);
-    })
+    });
 
     google.maps.event.addListener(marker, 'rightclick', function(event) {
         dropMarker(marker);
-    })
+    });
 }
 
 function saveMarker() {

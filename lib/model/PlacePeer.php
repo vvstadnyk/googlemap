@@ -23,7 +23,7 @@ class PlacePeer extends BasePlacePeer {
         $criteria = new Criteria();
         return self::doSelect($criteria);
     }
-    static public function getCountPlaces($user_id)
+    static public function getCountPlaces()
     {
         $criteria = new Criteria();
         return self::doCount($criteria);
