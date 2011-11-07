@@ -22,23 +22,29 @@ class mapActions extends sfActions
 
   public function executePlaces(sfWebRequest $request)
   {
-//      if ($request->isXmlHttpRequest())
-//     {
-          $this->places = array();
-          foreach (PlacePeer::getPlaces() as $palace)
-          {
-              $this->places[$palace->getId()] = $palace->asArray();
-          }
-//     }
+//      if ($request->isXmlHttpRequest()) {
+         $this->places = array();
+         foreach (PlacePeer::getPlaces() as $place) {
+                 $this->places[$place->getId()] = $place->asArray();
+         }
+//      }
   }
 
-public function executeCategoryes(sfWebRequest $request)
-{
-    if ($request->isXmlHttpRequest())
-   {
-        $this->categoryes = CategoryPeer::getCategoryes();
-   }
-}
+  public function executeDelete(sfWebRequest $request)
+  {
+      if ($request->isXmlHttpRequest()) {
+          $place = $this->getRoute()->getobject();
+
+          if ($place->getUserId() == sfContext::getInstance()->getUser()->getGuardUser()->getId()) {
+              $place->delete();
+              $this->setTemplate('save');
+          } else
+          {
+              $this->forward404();
+          }
+      }
+
+  }
 
 public function executeNew(sfWebRequest $request)
 {
@@ -51,28 +57,12 @@ public function executeNew(sfWebRequest $request)
 
 public function executeCreate(sfWebRequest $request)
 {
-    //    if ($request->isXmlHttpRequest())
+    if ($request->isXmlHttpRequest())
     //   {
        $this->form = new PlaceForm();
        $this->processForm($request, $this->form);
     //   }
 }
-
-
-  public function executeSave(sfWebRequest $request)
-  {
-      if ($request->isXmlHttpRequest())
-      {
-          $place = new Place();
-          $place->setUserId($this->GetUserId());
-          $place->setDescription($request->getParameter('description'));
-          $place->setCategoryId($request->getParameter('category'));
-          $place->setLat($request->getParameter('lat'));
-          $place->setLng($request->getParameter('lng'));
-          $place->setName($request->getParameter('name'));
-          $place->save();
-      }
-  }
 
 protected function processForm(sfWebRequest $request, sfForm $form)
 {

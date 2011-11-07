@@ -28,4 +28,5 @@ class PlacePeer extends BasePlacePeer {
         $criteria = new Criteria();
         return self::doCount($criteria);
     }
+
 } // PlacePeer

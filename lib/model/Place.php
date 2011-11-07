@@ -38,7 +38,7 @@ class Place extends BasePlace {
     {
         if ($this->isNew())
         {
-            $this->setUserId(sfContext::getInstance()->getUser());
+            $this->setUserId(sfContext::getInstance()->getUser()->getGuardUser()->getId());
         }
       return parent::save($con);
     }

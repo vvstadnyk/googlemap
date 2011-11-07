@@ -7,26 +7,12 @@ map:
   class:   sfPropelRouteCollection
   options: { model: Place }
 
-categoryxml:
-  url:  /map/categoryes.:sf_format
-  class: sfRequestRoute
-  param: { module: map, action: categoryes }
-  requirements:
-    sf_format: (?:xml)
-
 placexml:
   url:  /map/places.:sf_format
   class: sfRequestRoute
   param: { module: map, action: places }
   requirements:
     sf_format: (?:xml)
-
-place_save:
-  url:  /map/save
-  class: sfRequestRoute
-  param: { module: map, action: save }
-  requirements:
-    sf_method: [post]
 
 homepage:
   url:   /

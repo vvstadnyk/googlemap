@@ -21,7 +21,7 @@
       <?php endif ?>
 
       <div id="content">
-        <?php echo $sf_content ?>
+       <?php echo $sf_content ?>
       </div>
 
       <div id="footer">
