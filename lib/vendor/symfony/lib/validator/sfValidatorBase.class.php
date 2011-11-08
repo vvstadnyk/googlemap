@@ -41,7 +41,7 @@ abstract class sfValidatorBase
    *  * empty_value: empty value when value is not required
    *
    * Available error codes:
-   *
+   *marker
    *  * required
    *  * invalid
    *

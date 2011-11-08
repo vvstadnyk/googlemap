@@ -22,12 +22,12 @@ class mapActions extends sfActions
 
   public function executePlaces(sfWebRequest $request)
   {
-//      if ($request->isXmlHttpRequest()) {
+      if ($request->isXmlHttpRequest()) {
          $this->places = array();
          foreach (PlacePeer::getPlaces() as $place) {
                  $this->places[$place->getId()] = $place->asArray();
          }
-//      }
+      }
   }
 
   public function executeDelete(sfWebRequest $request)
@@ -35,7 +35,7 @@ class mapActions extends sfActions
       if ($request->isXmlHttpRequest()) {
           $place = $this->getRoute()->getobject();
 
-          if ($place->getUserId() == sfContext::getInstance()->getUser()->getGuardUser()->getId()) {
+          if ($place->getUserId() == $this->getUser()->getGuardUser()->getId()) {
               $place->delete();
               $this->setTemplate('save');
           } else

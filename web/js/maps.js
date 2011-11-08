@@ -66,7 +66,7 @@ function showWindow(marker) {
     for (var i = 0; i < objects.length; i++) {
         if (objects[i].marker == marker) {
             is_new = false;
-            contentText = "<p3>" + objects[i].name + "</p3>" +
+            contentText = "<p>" + objects[i].name + "</p>" +
                     "<p>" + objects[i].user + "</p>" +
                     "<p>" + objects[i].description + "</p>";
         }
@@ -85,7 +85,7 @@ function showWindow(marker) {
 
     } else infoWindow.setContent(contentText);
     infoWindow.open(map, marker);
-    map.setCenter(marker.getPosition());
+    map.setCenter(infoWindow.getPosition());
 }
 
 function addMarker(location, img, title, dragg) {
