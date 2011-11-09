@@ -5,16 +5,22 @@ jQuery('document').ready(function() {
 
 var map;
 var objects = new Array();
+var infoWindow = new google.maps.InfoWindow();
+var currentMarker;
+
+//parameters
 var image_all = "/images/img_yellow.png";
 var image_my = "/images/img_blue.png";
-var infoWindow = new google.maps.InfoWindow();
+var url_markers = document.location.href +"/map/places.xml";
+var url_new = document.location.href + "/map/new"
+var url_delete = document.location.href + "/map/"
 
 function loadMarkers() {
     clearMap();
     jQuery.ajax({
         type: "GET",
         dataType: "xml",
-        url: document.location.href +"/map/places.xml",
+        url: url_markers,
         success: function(placesXml){
            var count = placesXml.getElementsByTagName('place').length;
            for(var i=0; i < count; i++) {
@@ -31,7 +37,8 @@ function loadMarkers() {
 
                var Latlng = new google.maps.LatLng(place.lat, place.lng);
                var image = place.userId != place.currentUserId ? image_all : image_my;
-               var marker = addMarker(Latlng, image, place.name + '(' + place.user + ')', false);
+               var visibleMarker = place.userId == place.currentUserId ? true : false;
+               var marker = addMarker(Latlng, image, place.name + '(' + place.user + ')', false, visibleMarker);
                place.marker = marker;
                objects.push(place);
 
@@ -55,6 +62,16 @@ function initialize() {
     })
 }
 
+function showMarkers() {
+    var marker = currentMarker;
+    var cheked = jQuery('#showallmarkers').attr('checked');
+    for (var i = 0; i < objects.length; i++) {
+        if (objects[i].marker == marker) {
+
+        }
+    }
+}
+
 function showWindow(marker) {
     var is_new = true;
     var contentText;
@@ -68,14 +85,15 @@ function showWindow(marker) {
             is_new = false;
             contentText = "<p>" + objects[i].name + "</p>" +
                     "<p>" + objects[i].user + "</p>" +
-                    "<p>" + objects[i].description + "</p>";
+                    "<p>" + objects[i].description + "</p>"+
+                    "<p><input type='checkbox' id='showallmarkers' onclick='showMarkers()'>Показати всі маркери</p>";
         }
     }
     if (is_new) {
         jQuery.ajax({
             type: "GET",
             dataType: "html",
-            url: document.location.href + "/map/new",
+            url: url_new,
             success: function(result) {
                 infoWindow.setContent(result);
                 jQuery('#place_lat').val(marker.getPosition().lat());
@@ -85,16 +103,18 @@ function showWindow(marker) {
 
     } else infoWindow.setContent(contentText);
     infoWindow.open(map, marker);
-    map.setCenter(infoWindow.getPosition());
+    currentMarker = marker;
 }
 
-function addMarker(location, img, title, dragg) {
+function addMarker(location, icon, title, draggable, visible) {
     var marker = new google.maps.Marker({
         position: location,
         map: map,
-        icon: img,
-        draggable: dragg,
-        title: title
+        icon: icon,
+        draggable: draggable,
+        visible: visible,
+        title: title,
+        animation: google.maps.Animation.DROP
     });
     google.maps.event.addListener(marker, 'click', function(event) {
         showWindow(marker);
@@ -126,7 +146,7 @@ function dropMarker(marker) {
                 type: "DELETE",
                 dataType: "html",
                 data: "id="+id,
-                url: document.location.href + "/map/"+id,
+                url: url_delete+id,
                 success: function(result) {
                     if (result == 'ok') {
                         marker.setMap(null);
@@ -173,4 +193,17 @@ function getXmlValue(xmlDoc, name, i) {
         value = xmlDoc.getElementsByTagName(name)[i].childNodes[0].nodeValue;
     }
     return value;
+}
+
+distHaversine = function(p1, p2) {
+    var R = 6371; // earth's mean radius in km
+    var dLat  = rad(p2.lat() - p1.lat());
+    var dLong = rad(p2.lng() - p1.lng());
+
+    var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.cos(rad(p1.lat())) * Math.cos(rad(p2.lat())) * Math.sin(dLong/2) * Math.sin(dLong/2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    var d = R * c;
+
+    return d.toFixed(3);
 }

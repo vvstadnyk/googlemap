@@ -18,7 +18,7 @@
  */
 class Place extends BasePlace {
 
-  public function asArray()
+  public function asArray($currentUserId)
   {
     return array(
       'id'            => $this->getId(),
@@ -27,19 +27,12 @@ class Place extends BasePlace {
       'name'          => $this->getName(),
       'user'          => $this->getsfGuardUser()->getUsername(),
       'userId'        => $this->getUserId(),
-      'currentUserId' => sfContext::getInstance()->getUser()->getGuardUser()->getId(),
+      'currentUserId' => $currentUserId,
       'lat'           => $this->getLat(),
       'lng'           => $this->getLng(),
       'description'   => $this->getDescription(),
       'createdAt'     => $this->getCreatedAt('Y-m-d H:i:s')
     );
   }
-    public function save(PropelPDO $con = null)
-    {
-        if ($this->isNew())
-        {
-            $this->setUserId(sfContext::getInstance()->getUser()->getGuardUser()->getId());
-        }
-      return parent::save($con);
-    }
+
 } // Place

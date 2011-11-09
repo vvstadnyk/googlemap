@@ -3,4 +3,7 @@
 
 # default values
 all:
-  radius_find: 30
+  radiusFind: 30
+  pathIconMy: /images/img_blue.png
+  pathIconAll: /images/img_yellow.png
+

@@ -25,7 +25,7 @@ class mapActions extends sfActions
       if ($request->isXmlHttpRequest()) {
          $this->places = array();
          foreach (PlacePeer::getPlaces() as $place) {
-                 $this->places[$place->getId()] = $place->asArray();
+                 $this->places[$place->getId()] = $place->asArray($this->getUser()->getGuardUser()->getId());
          }
       }
   }
@@ -51,6 +51,7 @@ public function executeNew(sfWebRequest $request)
     if ($request->isXmlHttpRequest())
    {
        $place = new Place();
+       $place->setUserId($this->getUser()->getGuardUser()->getId());
        $this->form = new PlaceForm($place);
    }
 }
@@ -58,10 +59,10 @@ public function executeNew(sfWebRequest $request)
 public function executeCreate(sfWebRequest $request)
 {
     if ($request->isXmlHttpRequest())
-    //   {
+    {
        $this->form = new PlaceForm();
        $this->processForm($request, $this->form);
-    //   }
+    }
 }
 
 protected function processForm(sfWebRequest $request, sfForm $form)
@@ -70,6 +71,7 @@ protected function processForm(sfWebRequest $request, sfForm $form)
       $request->getParameter($form->getName()),
       $request->getFiles($form->getName())
   );
+
 
   if ($form->isValid())
   {

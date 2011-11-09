@@ -11,10 +11,10 @@ class PlaceForm extends BasePlaceForm
 {
   public function configure()
   {
-      unset($this['created_at'], $this['user_id']);
+      unset($this['created_at']);
 
+      $this->widgetSchema['user_id'] = new sfWidgetFormInputHidden();
       $this->widgetSchema['name'] = new sfWidgetFormInputText();
-
       $this->widgetSchema['lat'] = new sfWidgetFormInputHidden();
       $this->widgetSchema['lng'] = new sfWidgetFormInputHidden();
       $this->widgetSchema['description'] = new sfWidgetFormTextarea();
