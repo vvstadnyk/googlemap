@@ -5,18 +5,53 @@
 # # See documentation for your ORM's *:data-load task for more information.
 # 
 sfGuardUser:
-   val:
-     username: user1
-     password: 123456
-   test:
-     username: user2
-     password: 123456
+  user1:
+    username: user1
+    password: 123456
+  user2:
+    username: user2
+    password: 123456
 
 Category:
-  data1: { name: Музей, slug: muse }
-  data2: { name: Парк, slug: park }
-  data3: { name: Площа, slug: place }
-  data4: { name: Памятник, slug: pam }
+  museum:
+    name: Музей
+    slug: museum
+  park:
+    name: Парк
+    slug: park
+  area:
+    name: Площа
+    slug: area
+  monument:
+    name: Памятник
+    slug: monument
 
-#Place:
-#  pl1: {category_id: Парк, user_id: user1, lat: 49.1577, lng: 32.2668 }
+Place:
+  pl1:
+    category_id: park
+    user_id: user1
+    name: Холодний Яр
+    lat: 49.1612830314
+    lng: 32.2716203613
+    description: Партизанський рух
+  pl2:
+    category_id: monument
+    user_id: user1
+    name: Усипальниця Б. Хмельницького
+    lat: 49.0875890845
+    lng: 32.5462785645
+    description:
+  pl3:
+    category_id: park
+    user_id: user2
+    name: М. Залізняку
+    lat: 49.1630790767
+    lng: 32.4048295898
+    description: Засновнику Коліївщини
+  pl4:
+    category_id: museum
+    user_id: user2
+    name: Краєзнавчий
+    lat: 49.0731970073
+    lng: 32.6671281738
+    description: історія району
