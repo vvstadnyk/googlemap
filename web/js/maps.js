@@ -8,12 +8,14 @@ var objects = new Array();
 var infoWindow = new google.maps.InfoWindow();
 var currentMarker;
 
-//parameters
+//параметры
+//получать нужно от симфони
 var image_all = "/images/img_yellow.png";
 var image_my = "/images/img_blue.png";
 var url_markers = document.location.href +"/map/places.xml";
 var url_new = document.location.href + "/map/new"
 var url_delete = document.location.href + "/map/"
+var radiusFind = 30
 
 function loadMarkers() {
     clearMap();
@@ -34,14 +36,16 @@ function loadMarkers() {
                place.lng = parseFloat(getXmlValue(placesXml, 'lng', i));
                place.name = getXmlValue(placesXml, 'name', i);
                place.description = getXmlValue(placesXml, 'description', i);
+               place.myMarker = place.userId == place.currentUserId ? true : false;
 
                var Latlng = new google.maps.LatLng(place.lat, place.lng);
-               var image = place.userId != place.currentUserId ? image_all : image_my;
-               var visibleMarker = place.userId == place.currentUserId ? true : false;
+               var image = place.myMarker ? image_my : image_all;
+               var visibleMarker = place.myMarker ? true : false;
+
                var marker = addMarker(Latlng, image, place.name + '(' + place.user + ')', false, visibleMarker);
                place.marker = marker;
+               place.checked = false;
                objects.push(place);
-
            }
           }
         });
@@ -50,7 +54,7 @@ function loadMarkers() {
 function initialize() {
     var Latlng = new google.maps.LatLng(49.438, 32.067);
     var Options = {
-        zoom: 12,
+        zoom: 9,
         center: Latlng,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU}
@@ -62,12 +66,24 @@ function initialize() {
     })
 }
 
-function showMarkers() {
-    var marker = currentMarker;
-    var cheked = jQuery('#showallmarkers').attr('checked');
-    for (var i = 0; i < objects.length; i++) {
-        if (objects[i].marker == marker) {
+function visibilityMarkers(centerPoint, visible) {
 
+    for (var i = 0; i < objects.length; i++) {
+        if (!objects[i].myMarker) {
+            if (distHaversine(objects[i].marker.getPosition(), centerPoint) < radiusFind)
+            {
+                objects[i].marker.setVisible(visible);
+            }
+        }
+    }
+}
+
+function clickCheck() {
+    var marker = currentMarker;
+    for (var i = 0; i < objects.length; i++) {
+        if ((objects[i].marker == marker) && objects[i].myMarker) {
+            objects[i].checked = !objects[i].checked;
+            visibilityMarkers(marker.getPosition(), objects[i].checked);
         }
     }
 }
@@ -75,7 +91,12 @@ function showMarkers() {
 function showWindow(marker) {
     var is_new = true;
     var contentText;
+    var showallmarkersText = "";
+    var addCheck = false;
+    var chekText = "";
+    infoWindow.setContent(null);
     infoWindow.close();
+
     google.maps.event.addListener(infoWindow, 'domready', function(event) {
         saveEvent(marker, infoWindow);
     });
@@ -83,10 +104,20 @@ function showWindow(marker) {
     for (var i = 0; i < objects.length; i++) {
         if (objects[i].marker == marker) {
             is_new = false;
-            contentText = "<p>" + objects[i].name + "</p>" +
-                    "<p>" + objects[i].user + "</p>" +
-                    "<p>" + objects[i].description + "</p>"+
-                    "<p><input type='checkbox' id='showallmarkers' onclick='showMarkers()'>Показати всі маркери</p>";
+            if (objects[i].myMarker) {
+                chekText = objects[i].checked ? "checked='checked'" : "";
+                showallmarkersText = "<div><input type='checkbox' id='showallmarkers' onclick='clickCheck()' "+chekText+">Показати всі маркери</div>";
+//                addCheck = objects[i].checked ? true : false;
+            }
+
+            contentText =
+                    "<div id='window_view'>"+
+                    "<div id='lab_user'><label>Власник:</label><span>" + objects[i].user + "</span></div>" +
+                    "<div id='lab_category'><label>Категорія:</label><span>" + objects[i].category + "</span></div>" +
+                    "<div id='lab_name'><label>Назва:</label><span>" + objects[i].name + "</span></div>" +
+                    "<div id='lab_description'><label>Примітки:</label><span>" + objects[i].description + "</span></div>" +
+                    showallmarkersText+
+                    "</div>";
         }
     }
     if (is_new) {
@@ -104,6 +135,12 @@ function showWindow(marker) {
     } else infoWindow.setContent(contentText);
     infoWindow.open(map, marker);
     currentMarker = marker;
+
+//    if (addCheck) {
+//        jQuery.elementReady('showallmarkers', function(){
+//            jQuery(this).attr("checked","checked");
+//        });
+//    }
 }
 
 function addMarker(location, icon, title, draggable, visible) {
@@ -113,8 +150,7 @@ function addMarker(location, icon, title, draggable, visible) {
         icon: icon,
         draggable: draggable,
         visible: visible,
-        title: title,
-        animation: google.maps.Animation.DROP
+        title: title
     });
     google.maps.event.addListener(marker, 'click', function(event) {
         showWindow(marker);
@@ -195,7 +231,11 @@ function getXmlValue(xmlDoc, name, i) {
     return value;
 }
 
-distHaversine = function(p1, p2) {
+function rad (x) {
+    return x*Math.PI/180;
+}
+
+function distHaversine(p1, p2) {
     var R = 6371; // earth's mean radius in km
     var dLat  = rad(p2.lat() - p1.lat());
     var dLong = rad(p2.lng() - p1.lng());

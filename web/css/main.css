@@ -6,12 +6,48 @@
 }
 
 #div_place_new {
-    font-size: 8px;
-    height:270px;
-    width: 300px;
+    margin: 0px;
+    padding: 0px;
+
+    height:230px;
+    width: 240px;
+}
+#div_place_new label{
+    font-size: 12px;
+}
+
+#div_place_new h3 {
+    margin: 0px;
+    padding: 0px;
+    margin-bottom: 10px;
+}
+
+#place_category_id, #place_name, #place_description {
+    width: 170px;
+}
+#window_view {
+    font-size: 14px;
+}
+
+#window_view label {
+    font-weight: bold;
+}
+
+#window_view span {
+    margin-left: 10px;
+}
+
+#lab_description span {
+    width: 170px;
 }
 
 .error_list {
     color: red;
-    font-size: 10;
+    margin: 0px;
+    padding: 0px;
+
+}
+
+.error_list li {
+    font-size: 9px;
 }

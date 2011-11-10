@@ -6,9 +6,17 @@
 # 
 sfGuardUser:
    val:
-     username: val
+     username: user1
      password: 123456
    test:
-     username: test
+     username: user2
      password: 123456
 
+Category:
+  data1: { name: Музей, slug: muse }
+  data2: { name: Парк, slug: park }
+  data3: { name: Площа, slug: place }
+  data4: { name: Памятник, slug: pam }
+
+#Place:
+#  pl1: {category_id: Парк, user_id: user1, lat: 49.1577, lng: 32.2668 }
